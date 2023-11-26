@@ -1,23 +1,23 @@
-import Layout from "./routes/layout";
+import UserContextProvider from "./components/UserContextProvider";
+import Home from "./routes/Home";
 import Login from "./routes/login";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
-    children: [
-      {
-        path: "/login",
-        // loader:,
-        element: <Login />
-      }
-    ]
+    element: <Home />
+  },
+  {
+    path: "/login",
+    element: <Login />
   }
 ]);
 
-function App() {
-  return <RouterProvider router={router} />;
+export default function App() {
+  return (
+  <UserContextProvider>
+    <RouterProvider router={router} />
+  </UserContextProvider>
+  )
 }
-
-export default App;
