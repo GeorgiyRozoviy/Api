@@ -1,7 +1,7 @@
-import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../components/UserContextProvider";
 
 export default function Home() {
-  const user = "NO USER"
-  return <div>Hello {user} </div>
+  const { user, loading } = useContext(UserContext);
+  return <div>Hello {user?.email} </div>;
 }
