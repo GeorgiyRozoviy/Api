@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../components/UserContextProvider";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { User } from "../util/validation";
 import { z } from "zod";
 
@@ -19,27 +19,24 @@ export default function Login() {
       const user = User.parse({
         email,
         password,
-      });
+      })
       const query = new URLSearchParams(user).toString();
       fetch(`http://localhost:1001/users?${query}`)
         .then((r) => r.json())
         .then((users) => users[0])
         .then((user) => {
           if (user) {
+            console.log(user)
             userContext.onChange(user);
             setError(null);
             navigate("/");
           } else
-            setError(() => {
-              return { general: "Invalid User" };
-            });
+            setError({ general: "Такого пользователся нет" });
         });
     } catch (err) {
       if (err instanceof z.ZodError) {
         const { email, password } = err.format();
-        setError((currentError) => {
-          return { ...currentError, email, password };
-        });
+        setError({ email, password });
       }
     }
   };
@@ -59,11 +56,11 @@ export default function Login() {
 
   return (
     <div className="prose flex flex-col gap-4 m-auto">
-      <h1>Log in</h1>
+      <h1 className="m-auto">Log in</h1>
       <input
         type="email"
         className="prose w-11/12 p-1 bg-slate-200 placeholder-slate-400"
-        placeholder="email"
+        placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
@@ -71,7 +68,7 @@ export default function Login() {
         <input
           type={type}
           className="prose w-11/12 p-1 bg-slate-200 placeholder-slate-400 float-left"
-          placeholder="password"
+          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
@@ -80,17 +77,26 @@ export default function Login() {
         </span>
       </div>
       {errors?.email && (
-        <div className="text-red-400">{errors?.email?._errors[0]}</div>
+        <div className="text-red-400 m-auto">{errors?.email?._errors[0]}</div>
       )}
       {errors?.password && (
-        <div className="text-red-400">{errors?.password?._errors[0]}</div>
+        <div className="text-red-400 m-auto">
+          {errors?.password?._errors[0]}
+        </div>
       )}
-      {errors?.general && <div className="text-red-400">{errors?.general}</div>}
+      {errors?.general && (
+        <div className="text-red-400 m-auto">{errors?.general}</div>
+      )}
       <button
-        className="prose w-4/12 p-1 m-auto hover:bg-slate-300 "
+        className="prose w-4/12 p-1 m-auto bg-slate-200"
         onClick={handleLogin}>
         Login
       </button>
+      <p
+        className="m-auto text-gray-600 cursor-pointer"
+        onClick={() => navigate("/signup")}>
+        У меня нет аккаунта.
+      </p>
     </div>
   );
 }
