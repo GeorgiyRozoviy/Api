@@ -4,16 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { NewUser } from "../util/validation";
 import { z } from "zod";
 
-async function addUser (newUser) {
-    await fetch(`http://localhost:1001/users/`, {
-      method: "POST",
-      body: JSON.stringify(newUser),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    });
-  };
-
 export default function SignUp() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -24,6 +14,16 @@ export default function SignUp() {
   const userContext = useContext(UserContext);
 
   const navigate = useNavigate();
+
+  async function addUser (newUser) {
+    await fetch(`http://localhost:1001/users/`, {
+      method: "POST",
+      body: JSON.stringify(newUser),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+  };
 
   const handleLogin = async () => {
     setError(null);

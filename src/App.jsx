@@ -37,7 +37,7 @@ const router = createBrowserRouter([
         loader: notesLoader,
       },
       {
-        path: "/notes/:userId/add",
+        path: "/notes/add",
         element: <AddNote />,
       },
     ],

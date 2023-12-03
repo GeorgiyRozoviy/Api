@@ -1,7 +1,12 @@
-import { useCallback } from "react";
+import { useCallback, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../components/UserContextProvider";
 
 export default function AddNote() {
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
+  const [errors, setError] = useState(null);
+
   const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -15,53 +20,55 @@ export default function AddNote() {
       },
     });
   }
+  const handleAddNote = useCallback(async () => {
+    console.log(title, text);
+    if (title === "") {
+      setError({ general: "Note need a title" });
+    } else {
+      const now = new Date().toLocaleString();
 
-  const handleAddNote = useCallback(async ({ title, text }) => {
-    const now = new Date().toLocaleString();
-
-    const newNote = {
-      userId: user.id,
-      id: Date.now(),
-      title: title.trim(),
-      text,
-      date: now.split(",")[0],
-    };
-    add(newNote);
-    navigate("/notes");
+      const newNote = {
+        userId: user.id,
+        id: Date.now(),
+        title,
+        text,
+        date: now.split(",")[0],
+      };
+      add(newNote);
+      navigate("/notes");
+    }
   }, []);
 
   return (
-    <div className="flex flex-col gap-3">
-      <div className="w-full flex justify-between items-center mb-5">
-        <div className="w-1/4 flex justify-start items-center">
-          <button
-            onClick={() => navigate(-1)}
-            className="  text-center text-emerald-800 font-semibold text-lg  h-10">
-            Back
-          </button>
-        </div>
-        <h1 className="w-1/2 text-3xl  font-bold">{name.page}</h1>
-        <div className="w-1/4"></div>
+    <div className="flex flex-col gap-8 w-11/12">
+      <div className="flex gap-24 items-center">
+        <button className="bg-slate-200 p-1.5 px-3">Back</button>
+        <h1>Create new note</h1>
       </div>
-      <input
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        type="text"
-        placeholder="Name"
-        className="h-10 border-2 border-emerald-950 pl-2 text-lg "
-      />
-      {error && <div className="text-red-500">{error}</div>}
-      <textarea
-        defaultValue={text}
-        onChange={(e) => setText(e.target.value)}
-        rows={10}
-        placeholder="Note text"
-        className="border-2 border-emerald-950 pl-2 pt-2 text-lg"></textarea>
+      <div className="flex flex-col gap-4">
+        <input
+          className="prose w-11/12 p-1 bg-slate-200 placeholder-slate-400"
+          type="text"
+          placeholder="Title"
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
+        />
+
+        <textarea
+          rows={8}
+          className="prose w-11/12 p-1 bg-slate-200 placeholder-slate-400"
+          type="text"
+          placeholder="Text"
+          onChange={(e) => setText(e.target.value)}
+          value={text}
+        />
+      </div>
       <button
-        onClick={handleSave}
-        className="text-center bg-emerald-900 text-white text-xl font-medium  h-14">
-        {name.button}
+        className="prose w-4/12 p-1 m-auto bg-slate-200"
+        onClick={handleAddNote}>
+        Create
       </button>
+      {errors?.general && <div>{errors.general}</div>}
     </div>
   );
 }

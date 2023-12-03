@@ -47,10 +47,10 @@ export default function Notes() {
       <h1>Notes</h1>
       <Link
         className="prose w-4/12 p-1 m-auto bg-slate-200 text-center"
-        to={`/notes/${user.id}/add`}>
+        to={`/notes/add`}>
         Add note
       </Link>
-      <div className="w-11/12 flex flex-col gap-2 none">
+      <div className="w-11/12 flex flex-col-reverse gap-2 none">
         {notes.map((note) => (
           <Link
             className="flex justify-between w-10/12 p-1 m-auto bg-slate-200"
