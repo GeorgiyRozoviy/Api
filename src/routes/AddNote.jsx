@@ -41,14 +41,16 @@ export default function AddNote() {
   };
 
   return (
-    <div className="flex flex-col gap-8 w-11/12">
-      <div className="flex gap-24 items-center">
-        <button className="bg-slate-200 p-1.5 px-3">Back</button>
-        <h1>Create new note</h1>
-      </div>
+    <div className="flex flex-col gap-8 w-11/12 m-auto">
+        <button 
+        className="bg-slate-200 p-1.5 w-2/12"
+        onClick={() => navigate("/notes")}>
+        Back
+        </button>
+        <h1 className="text-3xl m-auto">Create new note</h1>
       <div className="flex flex-col gap-4">
         <input
-          className="prose w-11/12 p-1 bg-slate-200 placeholder-slate-400"
+          className="p-2 bg-slate-200 placeholder-slate-400"
           type="text"
           placeholder="Title"
           onChange={(e) => setTitle(e.target.value)}
@@ -57,7 +59,7 @@ export default function AddNote() {
 
         <textarea
           rows={8}
-          className="prose w-11/12 p-1 bg-slate-200 placeholder-slate-400"
+          className="p-2 bg-slate-200 placeholder-slate-400"
           type="text"
           placeholder="Text"
           onChange={(e) => setText(e.target.value)}
