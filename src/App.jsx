@@ -3,8 +3,11 @@ import UserContextProvider from "./components/UserContextProvider";
 import SignUp from "./routes/Registration";
 import Login from "./routes/login";
 import Layout from "./routes/Layout";
-import  Home from "./routes/Home";
+import Home from "./routes/Home";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import ErrorPage from "./routes/ErrorPage";
+import Notes, { loader as notesLoader } from "./routes/Notes";
+import AddNote from "./routes/AddNote";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +25,7 @@ const router = createBrowserRouter([
         <Layout />
       </RequireAuth>
     ),
-    errorElement: <Error />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -30,7 +33,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/notes",
-        // element: <Notes />,
+        element: <Notes />,
+        loader: notesLoader,
+      },
+      {
+        path: "/notes/:userId/add",
+        element: <AddNote />,
       },
     ],
   },

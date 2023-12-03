@@ -24,7 +24,7 @@ export default function Layout() {
               About
             </NavLink>
             <NavLink
-              to={`/notes/${user.id}`}
+              to={`/notes`}
               end={true}
               className={({ isActive }) =>
                 isActive ? " font-semibold" : ""

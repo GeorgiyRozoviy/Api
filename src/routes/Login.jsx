@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../components/UserContextProvider";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { User } from "../util/validation";
 import { z } from "zod";
 
@@ -26,7 +26,6 @@ export default function Login() {
         .then((users) => users[0])
         .then((user) => {
           if (user) {
-            console.log(user)
             userContext.onChange(user);
             setError(null);
             navigate("/");

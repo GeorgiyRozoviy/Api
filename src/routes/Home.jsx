@@ -6,7 +6,6 @@ export default function Home() {
   const { user } = useContext(UserContext);
 
   const navigate = useNavigate()
-  console.log(user);
   return (
     <main className="flex flex-col gap-14 justify-center items-center">
       <h1 className="text-4xl">About me</h1>
@@ -22,7 +21,7 @@ export default function Home() {
       </div>
       <button
         className="prose w-4/12 p-1 m-auto bg-slate-200"
-        onClick={() => navigate(`/notes/${user.id}`)}>
+        onClick={() => navigate(`/notes`)}>
         Go to notes
       </button>
     </main>
