@@ -20,6 +20,13 @@
       "name": "Georgiy",
       "date": "03.12.2023, 12:09:31",
       "id": 1701594571065
+    },
+    {
+      "email": "Ginger@gig.pop",
+      "password": "Sasagio23",
+      "name": "Eren Eger",
+      "date": "04.12.2023, 00:38:59",
+      "id": 1701639539527
     }
   ],
   "notes": [
@@ -39,9 +46,30 @@
     },
     {
       "userId": 1701594571065,
-      "id": 1701638835359,
-      "title": "123456789",
-      "text": "DGSGSDGGedsdd2",
+      "id": 1701639365617,
+      "title": "Ggdfjfdgfsftery",
+      "text": "1 - 1dasfgsgs\n2 - fsggsdH\n3 - llll",
+      "date": "04.12.2023"
+    },
+    {
+      "userId": 1701594571065,
+      "id": 1701639394125,
+      "title": "Boris loh",
+      "text": "124GGds",
+      "date": "04.12.2023"
+    },
+    {
+      "userId": 1701639539527,
+      "id": 1701639564829,
+      "title": "Reddit",
+      "text": "My first post!",
+      "date": "04.12.2023"
+    },
+    {
+      "userId": 1701639539527,
+      "id": 1701639580504,
+      "title": "Not reddit",
+      "text": "My second post!",
       "date": "04.12.2023"
     }
   ]

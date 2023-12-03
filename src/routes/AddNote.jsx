@@ -20,7 +20,8 @@ export default function AddNote() {
       },
     });
   }
-  const handleAddNote = useCallback(async () => {
+  console.log(title, text);
+  const handleAddNote = () => {
     console.log(title, text);
     if (title === "") {
       setError({ general: "Note need a title" });
@@ -37,7 +38,7 @@ export default function AddNote() {
       add(newNote);
       navigate("/notes");
     }
-  }, []);
+  };
 
   return (
     <div className="flex flex-col gap-8 w-11/12">
