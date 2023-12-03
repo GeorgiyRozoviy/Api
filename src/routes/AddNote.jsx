@@ -20,9 +20,7 @@ export default function AddNote() {
       },
     });
   }
-  console.log(title, text);
   const handleAddNote = () => {
-    console.log(title, text);
     if (title === "") {
       setError({ general: "Note need a title" });
     } else {

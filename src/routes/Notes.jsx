@@ -31,15 +31,10 @@ export default function Notes() {
   }, [userId]);
 
   const handleDelete = async (noteId) => {
-    try {
       await fetch(`http://localhost:1001/notes/${noteId}`, {
         method: "DELETE",
       });
-      console.log("удалено");
-      setNotes(notes.filter((note) => note.id !== noteId)); // Удаляем заметку из состояния
-    } catch (error) {
-      console.error("Ошибка удаления заметки", error);
-    }
+      setNotes(notes.filter((note) => note.id !== noteId));
   };
 
   return (
